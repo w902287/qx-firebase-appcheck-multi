@@ -1,0 +1,9 @@
+#!name=Firebase Gemini Header 多專案同步 v5
+#!desc=本地 8888 已停用；Dump Note 與 To-Do Speak 分流同步至同一 Private HF Space 的獨立端點，成功顯示通知
+#!author=Minis
+
+[rewrite_local]
+^https:\/\/firebasevertexai\.googleapis\.com\/v1beta\/projects\/(?:dump-note-ai|to-do-speak-ai)\/models\/gemini-.* url script-request-header https://raw.githubusercontent.com/w902287/qx-firebase-appcheck-multi/main/firebase-gemini-header-multi-sync-v5.js
+
+[mitm]
+hostname = %APPEND% firebasevertexai.googleapis.com
