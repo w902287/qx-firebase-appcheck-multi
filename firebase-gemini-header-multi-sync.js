@@ -10,7 +10,7 @@ function header(name) {
   const key = Object.keys(headers).find(k => k.toLowerCase() === name.toLowerCase());
   return key ? String(headers[key] || "").trim() : "";
 }
-function done() { $done($request); }
+function done() { $done({}); }
 const project = Object.keys(ROUTES).find(p => requestURL.indexOf("/projects/" + p + "/") >= 0);
 const token = header("X-Firebase-AppCheck");
 if (!project || !token) done();
@@ -30,9 +30,10 @@ else {
       body: JSON.stringify({ token: token }),
       timeout: 8
     }).then(r => {
-      const code = Number(r.statusCode || r.status || 0);
-      if (code < 200 || code >= 300) throw new Error("HTTP " + code);
-      console.log("[Gemini Header Sync] " + project + " updated"); done();
+      const rawCode = r && (r.statusCode !== undefined ? r.statusCode : r.status);
+      const code = parseInt(rawCode, 10);
+      if (Number.isFinite(code) && (code < 200 || code >= 300)) throw new Error("HTTP " + code);
+      console.log("[Gemini Header Sync] " + project + " updated (HTTP " + (Number.isFinite(code) ? code : "accepted") + ")"); done();
     }).catch(e => {
       $notify("Firebase App Check", project + " 同步失敗", String(e)); done();
     });
