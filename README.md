@@ -9,13 +9,13 @@ Quantumult X 多專案 Firebase App Check Header 同步模組。
 
 ## QX 使用
 
-本 GitHub 倉庫設定為 **Private**。GitHub Private Raw 不允許 Quantumult X 匿名訂閱，所以 QX 請使用 8888 提供的本地模組網址：
+公開模組網址：
 
 ```text
-http://127.0.0.1:8888/qx/firebase-gemini-header-multi.snippet
+https://raw.githubusercontent.com/w902287/qx-firebase-appcheck-multi/main/firebase-gemini-header-multi.snippet
 ```
 
-請停用舊的單專案 `firebase-gemini-header-sync.snippet`，只啟用上述多專案模組。
+請停用舊的單專案 `firebase-gemini-header-sync.snippet`，只啟用上述多專案模組。模組會從同一個公開倉庫載入同步腳本。
 
 ## 檔案
 
