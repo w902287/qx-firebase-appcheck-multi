@@ -1,0 +1,9 @@
+#!name=Firebase Gemini Header 多專案同步
+#!desc=沿用原 Header Sync：從兩個 Firebase Gemini 請求的 X-Firebase-AppCheck 分流同步到 8888／HF
+#!author=Minis
+
+[rewrite_local]
+^https:\/\/firebasevertexai\.googleapis\.com\/v1beta\/projects\/(?:dump-note-ai|to-do-speak-ai)\/models\/gemini-.* url script-request-header http://127.0.0.1:8888/qx/firebase-gemini-header-multi-sync.js
+
+[mitm]
+hostname = %APPEND% firebasevertexai.googleapis.com
