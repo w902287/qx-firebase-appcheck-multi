@@ -20,6 +20,6 @@ https://raw.githubusercontent.com/w902287/qx-firebase-appcheck-multi/main/fireba
 ## 檔案
 
 - `firebase-gemini-header-multi.snippet`
-- `firebase-gemini-header-multi-sync-v2.js`
+- `firebase-gemini-header-multi-sync-v3.js`
 
 程式碼不包含 Firebase API Key、App Check JWT 或 HF Token。HF Token 仍由 Quantumult X `$prefs` 的 `firebase_gemini_hf_token` 讀取。

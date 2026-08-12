@@ -3,7 +3,7 @@
 #!author=Minis
 
 [rewrite_local]
-^https:\/\/firebasevertexai\.googleapis\.com\/v1beta\/projects\/(?:dump-note-ai|to-do-speak-ai)\/models\/gemini-.* url script-request-header https://raw.githubusercontent.com/w902287/qx-firebase-appcheck-multi/main/firebase-gemini-header-multi-sync-v2.js
+^https:\/\/firebasevertexai\.googleapis\.com\/v1beta\/projects\/(?:dump-note-ai|to-do-speak-ai)\/models\/gemini-.* url script-request-header https://raw.githubusercontent.com/w902287/qx-firebase-appcheck-multi/main/firebase-gemini-header-multi-sync-v3.js
 
 [mitm]
 hostname = %APPEND% firebasevertexai.googleapis.com
