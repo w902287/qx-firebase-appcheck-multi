@@ -1,0 +1,9 @@
+#!name=Firebase Gemini Header 多專案同步 v4
+#!desc=Dump Note → 本地 8888；To-Do Speak → HF。HTTP 2xx 顯示成功通知，非 2xx 顯示失敗通知
+#!author=Minis
+
+[rewrite_local]
+^https:\/\/firebasevertexai\.googleapis\.com\/v1beta\/projects\/(?:dump-note-ai|to-do-speak-ai)\/models\/gemini-.* url script-request-header https://raw.githubusercontent.com/w902287/qx-firebase-appcheck-multi/main/firebase-gemini-header-multi-sync-v4.js
+
+[mitm]
+hostname = %APPEND% firebasevertexai.googleapis.com
