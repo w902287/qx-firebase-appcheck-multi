@@ -9,10 +9,10 @@ Quantumult X 多專案 Firebase App Check Header 同步模組。
 
 ## QX 使用
 
-公開模組網址（v5，本地 8888 已停用，兩專案均同步 HF）：
+公開模組網址（v7 強刷快取版，修復 $task.fetch）：
 
 ```text
-https://raw.githubusercontent.com/w902287/qx-firebase-appcheck-multi/main/firebase-gemini-header-multi-v5.snippet
+https://raw.githubusercontent.com/w902287/qx-firebase-appcheck-multi/main/firebase-gemini-header-multi-v7.snippet
 ```
 
 請停用舊的單專案 `firebase-gemini-header-sync.snippet`，只啟用上述多專案模組。模組會從同一個公開倉庫載入同步腳本。

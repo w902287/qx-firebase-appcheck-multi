@@ -1,0 +1,9 @@
+#!name=Firebase Gemini Header 多專案同步 v7
+#!desc=全新網址強刷 QX 腳本快取，Dump Note 與 To-Do Speak 分流同步至同一 Private HF Space
+#!author=Minis
+
+[rewrite_local]
+^https:\/\/firebasevertexai\.googleapis\.com\/v1beta\/projects\/(?:dump-note-ai|to-do-speak-ai)\/models\/gemini-.* url script-request-header https://raw.githubusercontent.com/w902287/qx-firebase-appcheck-multi/main/firebase_gemini_header_multi_sync_v7.js
+
+[mitm]
+hostname = %APPEND% firebasevertexai.googleapis.com
