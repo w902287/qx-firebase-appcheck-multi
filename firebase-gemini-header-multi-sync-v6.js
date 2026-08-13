@@ -1,4 +1,4 @@
-/* Quantumult X v6 (v5 updated): sync both Firebase projects to HF using native $task.fetch */
+/* Quantumult X v6: sync both Firebase projects to HF using native $task.fetch */
 const HF_BASE = "https://w902287-firebase-gemini-proxy.hf.space";
 const ROUTES = {
   "dump-note-ai": { label: "Dump Note → HF", url: HF_BASE + "/dump/admin/appcheck", pref: "dump_note_appcheck_token" },
@@ -62,7 +62,7 @@ if (!project || !token) {
       $task.fetch(fetchOptions).then(function(response) {
         const code = codeOf(response);
         if (code !== null && code >= 200 && code < 300) {
-          console.log("[Header Sync] " + project + " updated, HTTP " + code);
+          console.log("[Header Sync v6] " + project + " updated, HTTP " + code);
           if (typeof $notify !== "undefined") {
             $notify("Firebase App Check", "同步成功｜" + route.label, "HTTP " + code);
           }
@@ -73,7 +73,7 @@ if (!project || !token) {
         }
         finish();
       }, function(reason) {
-        console.log("[Header Sync Error] " + project + " " + JSON.stringify(reason));
+        console.log("[Header Sync v6 Error] " + project + " " + JSON.stringify(reason));
         if (typeof $notify !== "undefined") {
           $notify("Firebase App Check", "同步失敗｜" + route.label, String((reason && (reason.error || reason.errMsg)) || reason));
         }
