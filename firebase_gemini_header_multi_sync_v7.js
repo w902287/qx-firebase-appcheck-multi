@@ -1,4 +1,4 @@
-/* Firebase Gemini Request Header App Check Multi Sync (QX v7) */
+/* Firebase Gemini Request Header App Check Multi Sync (QX v7 - Zero Config) */
 const HF_BASE = "https://w902287-firebase-gemini-proxy.hf.space";
 const PREF_KEY = "firebase_gemini_hf_token";
 
@@ -21,34 +21,28 @@ if (!project || !token) {
     done();
 } else {
     const HF_TOKEN = (typeof $prefs !== "undefined" && $prefs ? $prefs.valueForKey(PREF_KEY) || "" : "").trim();
+    const route = ROUTES[project];
 
-    if (!HF_TOKEN.startsWith("hf_")) {
-        if (typeof $notify !== "undefined") {
-            $notify("Firebase App Check", "HF Token 未配置", "請在 QX 設置 firebase_gemini_hf_token");
+    const outHeaders = { "Content-Type": "application/json" };
+    if (HF_TOKEN.startsWith("hf_")) {
+        outHeaders["Authorization"] = `Bearer ${HF_TOKEN}`;
+    }
+
+    $task.fetch({
+        url: route.url,
+        method: "PUT",
+        headers: outHeaders,
+        body: JSON.stringify({ token })
+    }).then(response => {
+        const code = response.statusCode || response.status;
+        if (code < 200 || code >= 300) {
+            if (typeof $notify !== "undefined") $notify("Firebase App Check", `同步失敗｜${route.label}`, `HTTP ${code}`);
+        } else {
+            if (typeof $notify !== "undefined") $notify("Firebase App Check", `同步成功｜${route.label}`, "Token 已更新至 HF Proxy");
         }
         done();
-    } else {
-        const route = ROUTES[project];
-
-        $task.fetch({
-            url: route.url,
-            method: "PUT",
-            headers: {
-                "Authorization": `Bearer ${HF_TOKEN}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ token })
-        }).then(response => {
-            const code = response.statusCode || response.status;
-            if (code < 200 || code >= 300) {
-                if (typeof $notify !== "undefined") $notify("Firebase App Check", `同步失敗｜${route.label}`, `HTTP ${code}`);
-            } else {
-                if (typeof $notify !== "undefined") $notify("Firebase App Check", `同步成功｜${route.label}`, "Token 已更新至 HF Proxy");
-            }
-            done();
-        }).catch(error => {
-            if (typeof $notify !== "undefined") $notify("Firebase App Check", `同步失敗｜${route.label}`, `${error.name || 'Error'}: ${error.message || String(error)}`);
-            done();
-        });
-    }
+    }).catch(error => {
+        if (typeof $notify !== "undefined") $notify("Firebase App Check", `同步失敗｜${route.label}`, `${error.name || 'Error'}: ${error.message || String(error)}`);
+        done();
+    });
 }
